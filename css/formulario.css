@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image: url('vera.jpg');
+    background-image: url('../images/vera.jpg');
     size: 100px;
 }
 .form-register{
