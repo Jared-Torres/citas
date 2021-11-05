@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('vera.jpg');
+    size: 100px;
+}
+.form-register{
+    width: 400px;
+    background: rgb(39, 157, 161);
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'Times New Roman';
+    box-shadow: 7px 13px 37px #000;
+}
+
+.form-register h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.controls{
+    width: 100%;
+    background: rgb(82, 217, 241);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #000000;
+    font-family: 'calibria';
+    font-size: 18px;
+    box-shadow: 7px 13px 37px #000;
+}
+.form-register p{
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+}
+.form-register a{
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+}
+.form-register a:hover{
+    color: white;
+    text-decoration: underline;
+}
+.form-register .botons{
+    width: 100px;
+    background: rgb(8, 156, 156);
+    border: none;
+    padding: 12px;
+    color: rgb(0, 0, 0);
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+.form-register .seleccion{
+    background: rgb(82, 217, 241);
+    box-shadow: 5px 10px 60px #000;
+}
+.op{
+    text-align: left;
+    color: rgb(0, 0, 0);
+    width: 15px;
+    font-size:medium;
+}
+.flecha {
+	position: absolute;
+	top: 10%;
+	width: 50px;
+	height: 50px;
+	background: transparent;
+	border-top: 1vmin solid rgb(0, 0, 0);
+	border-right: 1vmin solid rgb(0, 0, 0);
+	box-shadow: 0 0 0 rgb(0, 0, 0);
+	transition: all 200ms ease;
+}
+	
+    .izq {
+		left: 0px;
+		transform: translate3d(0,-50%,0) rotate(-135deg);
+    }
+
+	.right {
+		right: 0;
+		transform: translate3d(0,-50%,0) rotate(45deg);
+	}
+	
+	
