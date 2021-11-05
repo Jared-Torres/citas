@@ -7,7 +7,9 @@
     <title>Inicio</title>
 </head>
 <body>
-    david es gei
+    david es gei x2
     <a href="logout.php">cerrar sesion</a>
+
+
 </body>
 </html>
