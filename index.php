@@ -3,23 +3,60 @@
   session_start();
 
   if (isset($_SESSION['user_id'])) {
-    header('Location: catalogue.php');
+    header('Location: principal.php');
   }
-  require '../database.php';
+  if (isset($_SESSION['admin_id'])) {
+    header('Location: gestion.php');
+  }
+
+  require 'database.php';
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    $results = NULL;
     $records = $conn->prepare('SELECT idcliente, correo, password FROM cliente WHERE correo = :email');
     $records->bindParam(':email', $_POST['email']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
+    $contra = $_POST['password'];
+
 
     $message = '';
+    $value = false;
 
-    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-      $_SESSION['user_id'] = $results['idcliente'];
-      header("Location: catalogue.php");
+    if($results != NULL){
+      $value = password_verify($contra, $results['password']);
+      if($value == true){
+        $_SESSION['user_id'] = $results['idcliente'];
+        header("Location: principal.php");
+      }else {
+          $message = 'Correo o contraseña incorrectos';
+        }
     } else {
-      $message = 'Correo o contraseña incorrectos';
+
+      $results2 = NULL;
+      $records2 = $conn->prepare('SELECT idadministrador, correo, password FROM administrador WHERE correo = :email');
+      $records2->bindParam(':email', $_POST['email']);
+      $records2->execute();
+      $results2 = $records2->fetch(PDO::FETCH_ASSOC);
+      $results3 = $records2->fetch(PDO::FETCH_ASSOC);
+      $value2=false;
+
+      $message = '';
+
+
+      if($results2 != NULL){
+        
+        if(password_verify($_POST['password'], $results2['password'])){
+          $_SESSION['admin_id'] = $results2['idadministrador'];
+          header("Location: gestion.php");
+          $message='Datos correctos';
+
+        }else {
+            $message = 'Correo o contraseña del administrador incorrectos';
+          }
+      }else{
+        $message='Correo no encontrado';
+      }
     }
   }
 ?>
@@ -39,7 +76,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/inicio_sesion.css">
+  <link rel="stylesheet" href="css/inicio_sesion.css">
 
   <title>E-commerce</title>
 </head>
@@ -61,7 +98,7 @@
             <div class="carousel-item img-1 min-vh-100 active">
               <div class="carousel-caption d-none d-md-block">
                 <h5 class="font-weight-bold text-dark">Todo lo que necesites</h5>
-                <a href="index.html" class="text-decoration-none">Visita nuestra tienda</a>
+                <a href="index.php" class="text-decoration-none">Visita nuestra tienda</a>
               </div>
             </div>
             <div class="carousel-item img-2 min-vh-100">
@@ -91,11 +128,11 @@
       </div>
       <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
         <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
-          <img src="../logos/logo.png" alt="logo" class="img-fluid">
+          <img src="logos/logo.png" alt="logo" class="img-fluid">
         </div>
         <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
           <h1 class="font-weight-bold mb-4"><b>Bienvenido de vuelta</b></h1>
-          <form action="vistalogin.php" method="POST">
+          <form action="index.php" method="POST">
             <div class="mb-4">
               <label for="exampleInputEmail1" class="form-label font-weight-bold cuenta">Email</label>
               <input name = "email" type="email" class="form-control bg-light-x border-0" placeholder="Ingresa tu Email"
@@ -108,6 +145,9 @@
               <a href="#" id="emailHelp" class="form-text text-muted text-decoration-none cuenta1">¿Has olvidado tu
                 contraseña?</a>
             </div>
+              <?php if(!empty($message)): ?>
+                <div style="color: white; text-align:center; background-color:red; border-radius: 5px;"><p style="font-weight:bold;"> <?= $message ?></p></div>
+              <?php endif; ?>
             <button type="submit" class="btn btn-primary w-100 cuenta">Iniciar Sesion</button>
           </form>
         </div>
