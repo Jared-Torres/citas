@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
     <link rel="stylesheet" href="css/formulario.css">
     <title>Formulario de problemas</title>
-=======
+
  
 </head>
 
@@ -45,7 +44,6 @@
                 <a href="#" class="flecha right"></a>
             </div>
         
->>>>>>> Stashed changes
     </section>
 
 </body>
