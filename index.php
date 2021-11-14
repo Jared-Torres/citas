@@ -6,7 +6,7 @@
     header('Location: principal.php');
   }
   if (isset($_SESSION['admin_id'])) {
-    header('Location: gestion.php');
+    header('Location: agregarProducto.php');
   }
 
   require 'database.php';
@@ -48,7 +48,7 @@
         
         if(password_verify($_POST['password'], $results2['password'])){
           $_SESSION['admin_id'] = $results2['idadministrador'];
-          header("Location: gestion.php");
+          header("Location: agregarProducto.php");
           $message='Datos correctos';
 
         }else {
@@ -66,7 +66,6 @@
 <html lang="es">
 
 <head>
-<<<<<<< Updated upstream
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,7 +98,7 @@
             <div class="carousel-item img-1 min-vh-100 active">
               <div class="carousel-caption d-none d-md-block">
                 <h5 class="font-weight-bold text-dark">Todo lo que necesites</h5>
-                <a href="index.php" class="text-decoration-none">Visita nuestra tienda</a>
+                <a href="#" class="text-decoration-none">Visita nuestra tienda</a>
               </div>
             </div>
             <div class="carousel-item img-2 min-vh-100">
@@ -174,76 +173,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-=======
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="intentos.css">
-    <title>Formulario registro</title>
-</head>
-<body>
-    <section class="form-register">
-        <h4><center>Formulario de problema</center></h4>
-
-            <input class="controls" type="text" name="id" id="id" placeholder="Ingrese su ID">
-            <br><br>
-            <form class="controls" name="problema" id="problema" >
-                Seleccione problema
-                <select class="seleccion">
-                    <option disabled selected="">opciones a escojer</option>
-                    <option class="op">Virus informatico</option>
-                    <option class="op">Computadora lenta</option>
-                    <option class="op">Exceso de porno</option>
-                    <option class="op">Error </option>
-                    <option class="op">Armado de PC</option>
-                    <option class="op">Sale humo</option>
-                </select>
-            </form>
-            <br><br>
-
-            <input class="controls" type="datetime" name="day" id="day" placeholder="Ingrese el dia que quiere">
-            <br><br>
-
-            <form class="controls" name="hora" id="hora" >
-                Seleccione hora deseada
-                <select class="seleccion">
-                    <option disabled selected="">opciones a escojer</option>
-                    <option class="op">8 AM</option>
-                    <option class="op">9 AM</option>
-                    <option class="op">10 AM</option>
-                    <option class="op">11 AM</option>
-                    <option class="op">12 AM</option>
-                    <option class="op">13 PM</option>
-                    <option class="op">14 PM</option>
-                    <option class="op">15 PM</option>
-                    <option class="op">16 PM</option>
-                </select>
-            </form>
-            <br><br>
-
-            <form class="controls" name="mes" id="mes" >
-                Seleccione mes deseado
-                <select class="seleccion">
-                    <option disabled selected="">opciones a escojer</option>
-                    <option class="op">Enero</option>
-                    <option class="op">Febrero</option>
-                    <option class="op">Marzo</option>
-                    <option class="op">Abril</option>
-                    <option class="op">Mayo</option>
-                    <option class="op">Junio</option>
-                    <option class="op">Julio</option>
-                    <option class="op">Agosto</option>
-                    <option class="op">Septiembre</option>
-                    <option class="op">Octubre</option>
-                    <option class="op">Noviembre</option>
-                    <option class="op">Diciembre</option>
-                </select>
-            </form>
-
-        <p>Estoy de acuerdo con <a href="#">Terminos y condiciones</a></p>
-    </section>
-    
->>>>>>> Stashed changes
 </body>
 
 </html>

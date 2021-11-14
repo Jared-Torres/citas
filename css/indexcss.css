@@ -19,6 +19,11 @@
 }
 
 .liusuario{
-    padding: 15px;
+    size: 100px;
+    text-align: center;
     font-weight: bold;
+}
+
+.fondo-footer{
+    background: #1B1F2F;
 }
