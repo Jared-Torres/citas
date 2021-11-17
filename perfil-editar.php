@@ -1,7 +1,7 @@
 <?php require 'partials/header.php' ?>
 <?php
 if ($user == null) {
-    header("Location: vistas/vistalogin.php");
+    header("Location: index.php");
 }
 ?>
 <?php

@@ -1,7 +1,7 @@
 <?php require 'partials/header.php' ?>
 <?php
 if ($user == null) {
-    header("Location: vistas/vistalogin.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -46,9 +46,9 @@ if ($user == null) {
                         $vector[$contador] = $row->idcita;
                         $contador = $contador+1;
                         }
-                        $vector2=$op;
                         ?>
                         <?php
+                        $vector = $_POST['op'];
                         for ($i = 0; $i < count($vector); $i++) {
                         ?>
                             <div class="form-check form-check-inline">

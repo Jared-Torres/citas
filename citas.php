@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 if ($user == null) {
-    header("Location: vistas/vistalogin.php");
+    header("Location: index.php");
 }
 ?>
 
