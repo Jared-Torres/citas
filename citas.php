@@ -36,8 +36,8 @@ if ($user == null) {
                 ?>
                 <?php
                 $estado = 'pendiente';
-                
-                $sql = "select * from orden where estado='pendiente' AND idcliente =" . $user['idcliente'] .  "";
+               
+                $sql = "select * from orden o inner join cita c on o.idcita = c.idcita and o.estado = 'pendiente' and o.idcliente =" . $user['idcliente'] .  "";
                 $result = db_query($sql);
                 $contador = 1;
                 while ($row = mysqli_fetch_object($result)) {
@@ -45,23 +45,13 @@ if ($user == null) {
 
                     <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
                         <div class="col-md-6">
-                            <label class="form-label datos fw-bold">Dirección <?php echo $contador ?> : </label>
+                            <label class="form-label datos fw-bold">Cita <?php echo $contador ?> : </label>
                             <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">
-                                Estado: <u><?php echo $row->estado; ?></u><br>
-                                Municipio: <u><?php echo $row->municipio; ?></u><br>
-                                Colonia: <u><?php echo $row->colonia; ?></u><br>
-                                Calle: <u><?php echo $row->calle; ?></u><br>
-                                Numero exterior: <u><?php echo $row->numexterior; ?></u><br>
-                                Numero interior: <u><?php echo $row->numinterior; ?></u><br>
-                                Lote: <u><?php echo $row->lote; ?></u><br>
-                                Manzana: <u><?php echo $row->manzana; ?></u><br>
-                                Edificio: <u><?php echo $row->edificio; ?></u><br>
-                                Numero de piso: <u><?php echo $row->numpiso; ?></u><br>
-                                CP: <u><?php echo $row->cp; ?></u><br>
-                            </div>
-                            <div class="position-relative">
-                                <a class="btn btn-danger" href="direcciones/borrar.php?iddireccion=<?php echo $row->iddireccion; ?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
-                                <a href="perfil_direcciones_editar.php?iddireccion=<?php echo $row->iddireccion; ?>" class="btn btn-outline-primary bottom-0 end-0 boton1">Editar</a>
+                                Servicio: <?php echo $row->nombre?><br>
+                                Costo: &#36; <?php echo $row->costo?><br>
+                                Duracion en horas del servicio: <?php echo $row->horas?><br>
+                                Fecha de cita: <?php echo $row->dia?> <?php echo $row->hora?><br>
+                                Estado: <?php echo $row->estado?><br>
                             </div>
                         </div>
 
