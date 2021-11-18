@@ -4,6 +4,8 @@ if ($user == null) {
     header("Location: index.php");
 }
 $message = null;
+$idcita = null;
+include("funciones/funciones.php");
 
 if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
 
@@ -48,18 +50,57 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                         <label class="form-label datos fw-bold rounded informacion fw-bold">Hola <?= $user['nombre']; ?> <?= $user['paterno']; ?> </label>
                         <label class="form-label datos  rounded informacion">Ingrese los campos solicitados para sus citas</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display: inline-block;">
+                        <?php
+                        if (isset($_GET['idcita'])) {
+                            $idcita = $_GET['idcita'];
+                        }
+
+                        if (isset($_POST['op']) || $idcita != null) { ?>
+                            <div>
+                                <li>
+                                    <a class="" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <label class="shadow-sm p-3 mb-5 bg-body rounded fw-bold">Fechas no disponibles <i class="fas fa-angle-down"></i> </label>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <?php
+
+                                        $di2 = getdate();
+                                        $sql2 = "select * from orden where dia > '" . $di2['year'] . "-" . $di2['mon'] . "-" . $di2['mday'] . "' order by dia asc, hora asc";
+                                        $disponibilidad = db_query2($sql2);
+                                        while ($row2 = mysqli_fetch_object($disponibilidad)) { ?>
+
+                                            <div class="col-md-6 dropdown-item">
+                                                <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion"><?php echo $row2->dia; ?> <?php echo $row2->hora; ?></div>
+                                            </div>
+
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </div>
+
+                            <br>
+                        <?php } ?>
                     </div>
 
                     <div class="col-md-12 mb-5">
 
                         <?php
-                        if (isset($_POST['op'])) {
-                            include("funciones/funciones.php");
+                        if (isset($_GET['idcita'])) {
+                            $idcita = $_GET['idcita'];
+                        }
+                        if (isset($_POST['op']) || $idcita != null) {
+
                             $bander = true;
                             $contadorL = 0;
-                            $contadorL = count($_REQUEST['op']);
-                            $vector = $_REQUEST['op'];
+
+                            if (isset($_POST['op'])) {
+                                $vector = $_REQUEST['op'];
+                            } else {
+                                $vector = $idcita;
+                            }
+
                             $idcit = $vector[0];
 
                             $sql = "select * from cita WHERE idcita =" . $vector[0] . "";
@@ -68,9 +109,13 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                             $nume = $row->idcita;
 
                             $i = 0;
-                            while ($i < $contadorL) {
                         ?>
+                            <div>
                                 <form action="citas-programar.php?idcita=<?php print $nume; ?>" method="post">
+                                    <div class="form-check form-check-inline" style="display: none">
+                                        <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>" checked required disabled>
+                                        <label class="form-check-label"><?php echo $row->nombre ?></label>
+                                    </div>
                                     <div class="col-md-6">
                                         <label class="form-label datos fw-bold">Servicio de: <?php echo $row->nombre; ?> </label>
                                     </div>
@@ -79,29 +124,75 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                         <label class="form-label">Ingrese el dia y la hora para agendar su cita </label>
                                     </div><br>
 
-                                    <div class="col-md-6">
-                                        <input type="date" class="form-control" name="dia">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="time" class="form-control" name="hora">
-                                    </div><br>
+
+                                    <?php if (isset($_GET['idcita'])) {
+                                        $diaelejido = $_REQUEST['dia'];
+                                        $idcita = $_GET['idcita']; ?>
+                                        <div class="col-md-6">
+                                            <?php $di = getdate(); ?>
+                                            <input id="fechita" type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>" value="<?php print $diaelejido ?>">
+                                        </div>
+                                    <?php } else { ?>
+
+                                        <div class="col-md-6">
+                                            <?php $di = getdate(); ?>
+                                            <input id="fechita" type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>">
+                                        </div>
+                                    <?php } ?>
+
+                                    <?php if (isset($_GET['idcita'])) {
+                                        $horas = array (
+                                            0 => "08:00:00",
+                                            1 => "09:00:00",
+                                            2 => "10:00:00",
+                                            3 => "11:00:00",
+                                            4 => "12:00:00",
+                                            5 => "13:00:00",
+                                            6 => "14:00:00",
+                                            7 => "15:00:00",
+                                            8 => "16:00:00",
+                                            9 => "17:00:00",
+                                            10 => "18:00:00",
+                                        );
+                                        $idcita = $_GET['idcita'];
+                                        $sql3 = "select * from orden where dia ='" . $diaelejido . "'";
+                                        $result3 = db_query($sql3);
+                                        $i = 0;
+
+                                        $horasno;
+                                        $j = 0;
+                                        while ($row3 = mysqli_fetch_object($result3)){ 
+                                            $horasno[$j] = $row3->hora;
+                                            $j++;
+                                        };
+                                        $horasno[$j] = "00:00:00";
 
 
 
-                                    <button class="btn btn-outline-success" type="submit" name="send">Agendar</button>
-                                    <a href="citas-programar.php" class="btn btn-outline-danger">Cancelar</a>
+                                        while ($i < count($horas)) {
+                                    ?>
+                                            <div class="col-md-6">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="hora" value="<?php print $horas[$i]; ?>" <?php for($z=0; $z<count($horasno); $z++){if($horasno[$z] == $horas[$i]){ print "disabled"; break; }}  ?>>
+                                                    <label class="form-check-label"><?php print $horas[$i];  ?></label>
+                                                </div>
+                                            </div><br>
+                                    <?php $i++;}
+                                    } ?>
+
+                                    <button class="btn btn-outline-success" type="submit" name="send">Seleccionar fecha</button>
+                                    <a href="citas-programar.php" class="btn btn-outline-danger">Regresar</a>
 
                                 </form>
+                            </div>
+                        <?php
 
-                            <?php
-                                $i++;
-                            }
                         } else {
-                            ?>
+                        ?>
                             <label class="form-label datos fw-bold">Seleccione un servicio </label><br>
                             <?php
 
-                            include("funciones/funciones.php");
+
                             $op;
 
                             $sql = "select * from cita";
@@ -133,7 +224,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                             </div>
                             <div style="text-align: center;">
                                 <a class="btn btn-outline-primary" href="citas-programar.php">Agendar otra cita</a>
-                                    <a class="btn btn-outline-success" href="citas.php">Ver citas agendadas</a>
+                                <a class="btn btn-outline-success" href="citas.php">Ver citas agendadas</a>
                             </div>
 
                         <?php } ?>

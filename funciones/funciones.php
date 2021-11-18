@@ -5,6 +5,12 @@ function db_query($query) {
 
     return $result;
 }
+function db_query2($query) {
+    $connection = mysqli_connect("localhost","root","","gestor-citas");
+    $result = mysqli_query($connection,$query);
+
+    return $result;
+}
 
 function delete($tblname,$field_id,$id){ //Funcion para borrar registros
 

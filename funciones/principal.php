@@ -18,7 +18,7 @@
       $records2->execute();
       $results2 = $records2->fetch(PDO::FETCH_ASSOC);
 
-      if(count($results2 > 0)){
+      if(count($results2)>0){
         $direccion = $results2;
       }
     }
