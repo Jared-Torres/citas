@@ -3,6 +3,30 @@
 if ($user == null) {
     header("Location: index.php");
 }
+$message = null;
+
+if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
+
+    $sql = "INSERT INTO orden ( idcliente, idcita, dia, hora, estado) VALUES (:idcliente, :idcita, :dia, :hora, :estado)";
+
+    $stmt = $conn->prepare($sql);
+
+    $idcit = $_GET['idcita'];
+    $stmt->bindParam(':idcliente', $user['idcliente']);
+    $stmt->bindParam(':idcita', $idcit);
+    $stmt->bindParam(':dia', $_POST['dia']);
+    $stmt->bindParam(':hora', $_POST['hora']);
+    $est = "pendiente";
+    $stmt->bindParam(':estado', $est);
+
+    if ($stmt->execute()) {
+        $message = 'Cita agendada';
+    } else {
+        $message = 'Error al agendar cita';
+    }
+}
+
+
 ?>
 
 <div class="container row">
@@ -14,9 +38,11 @@ if ($user == null) {
                 <h2 class="fw-bold">Cita nueva</h2>
             </div>
             <hr>
+            <?php
+            if ($message == null) {
 
+            ?>
 
-            <form action="citas-programar.php" method="post">
                 <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
                     <div class="col-md-6 mb-5">
                         <label class="form-label datos fw-bold rounded informacion fw-bold">Hola <?= $user['nombre']; ?> <?= $user['paterno']; ?> </label>
@@ -26,67 +52,94 @@ if ($user == null) {
                     </div>
 
                     <div class="col-md-12 mb-5">
-                        <label class="form-label datos fw-bold">Servicios : </label><br>
+
                         <?php
+                        if (isset($_POST['op'])) {
+                            include("funciones/funciones.php");
+                            $bander = true;
+                            $contadorL = 0;
+                            $contadorL = count($_REQUEST['op']);
+                            $vector = $_REQUEST['op'];
+                            $idcit = $vector[0];
 
-                        include("funciones/funciones.php");
-                        $op;
+                            $sql = "select * from cita WHERE idcita =" . $vector[0] . "";
+                            $result2 = db_query($sql);
+                            $row = mysqli_fetch_object($result2);
+                            $nume = $row->idcita;
 
-                        $sql = "select * from cita";
-                        $result = db_query($sql);
-                        $contador = 0;
-                        $vector = array();
-                        while ($row = mysqli_fetch_object($result)) {
+                            $i = 0;
+                            while ($i < $contadorL) {
                         ?>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="op[]" value="<?php echo $row->nombre ?>">
-                                <label class="form-check-label"><?php echo $row->nombre ?></label>
-                            </div>
-                        <?php
-                        $vector[$contador] = $row->idcita;
-                        $contador = $contador+1;
+                                <form action="citas-programar.php?idcita=<?php print $nume; ?>" method="post">
+                                    <div class="col-md-6">
+                                        <label class="form-label datos fw-bold">Servicio de: <?php echo $row->nombre; ?> </label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ingrese el dia y la hora para agendar su cita </label>
+                                    </div><br>
+
+                                    <div class="col-md-6">
+                                        <input type="date" class="form-control" name="dia">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="time" class="form-control" name="hora">
+                                    </div><br>
+
+
+
+                                    <button class="btn btn-outline-success" type="submit" name="send">Agendar</button>
+                                    <a href="citas-programar.php" class="btn btn-outline-danger">Cancelar</a>
+
+                                </form>
+
+                            <?php
+                                $i++;
+                            }
+                        } else {
+                            ?>
+                            <label class="form-label datos fw-bold">Seleccione un servicio </label><br>
+                            <?php
+
+                            include("funciones/funciones.php");
+                            $op;
+
+                            $sql = "select * from cita";
+                            $result = db_query($sql);
+                            $contador = 0;
+                            while ($row = mysqli_fetch_object($result)) {
+                            ?>
+                                <form action="citas-programar.php" method="post">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>">
+                                        <label class="form-check-label"><?php echo $row->nombre ?></label>
+                                    </div>
+                                <?php
+                                $contador = $contador + 1;
+                            }
+                                ?>
+                                <div class="container position-relative mt-3">
+                                    <button class="btn btn-outline-success boton1" type="submit" name="send">Enviar</button>
+                                </div>
+                                </form>
+                            <?php
                         }
+                            ?>
+
+                        <?php } else {
                         ?>
-                        <?php
-                        $vector = $_POST['op'];
-                        for ($i = 0; $i < count($vector); $i++) {
-                        ?>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label"><?php print $vector[$i] ?></label>
+                            <div style="text-align:center; border-radius: 5px;">
+                                <p style="font-weight:bold;"> <?= $message ?></p>
                             </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
+                            <div style="text-align: center;">
+                                <a class="btn btn-outline-primary" href="citas-programar.php">Agendar otra cita</a>
+                                    <a class="btn btn-outline-success" href="citas.php">Ver citas agendadas</a>
+                            </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label datos fw-bold">Fecha de Nacimiento : </label>
-                        <input type="date" class="form-control" id="fechanac" placeholder="Fecha de nacimiento..." name="fechanac" value=<?= $user['fechanac']; ?>>
+                        <?php } ?>
                     </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label datos fw-bold">Usuario : </label>
-                        <input type="text" class="form-control" id="user" placeholder="Nombre..." name="user" value=<?= $user['user']; ?>>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label datos fw-bold">Correo Electronico : </label>
-                        <input type="email" class="form-control" id="correo" placeholder="E-mail..." name="correo" value=<?= $user['correo']; ?>>
-                    </div>
-
-                    <div class="col-md-6 mb-4 mt-5">
-                        <label class="form-label datos fw-bold">Tel Movil : </label>
-                        <input type="text" class="form-control" id="tel" placeholder="Telefono..." name="tel" value=<?= $user['tel']; ?>>
-                    </div>
-                    <br>
-
-                    <div class="container position-relative mt-3">
-                        <button class="btn btn-outline-success boton1" type="submit" name="send">guardar</button>
-                        <a href="principal.php" class="btn btn-outline-danger boton1">Cancelar</a>
-                    </div>
-
-
                 </div>
-            </form>
+
 
         </div>
     </div>
@@ -94,4 +147,9 @@ if ($user == null) {
 
 </div>
 </div>
+<script>
+    function siguiente() {
+
+    }
+</script>
 <?php require 'partials/footer.php' ?>
