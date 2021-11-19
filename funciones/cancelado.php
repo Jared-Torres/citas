@@ -1,6 +1,7 @@
 <?php 
 include("funciones.php");
+
 $id = $_GET['idorden'];
-delete('orden','idorden',$id);
+update('orden','estado','cancelado','idorden' ,$id);
 header("location: ../vistasadmin/citas-cliente.php");
 ?>

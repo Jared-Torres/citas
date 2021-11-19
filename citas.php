@@ -47,7 +47,7 @@ if ($user == null) {
                         <div class="col-md-6">
                             <label class="form-label datos fw-bold">Cita <?php echo $contador ?> : </label>
                             <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">
-                                Servicio: <?php echo $row->nombre?><br>
+                                Servicio: <?php echo $row->servicio?><br>
                                 Costo: &#36; <?php echo $row->costo?><br>
                                 Duracion en horas del servicio: <?php echo $row->horas?><br>
                                 Fecha de cita: <?php echo $row->dia?> <?php echo $row->hora?><br>

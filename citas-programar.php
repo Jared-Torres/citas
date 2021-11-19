@@ -97,13 +97,15 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
 
                             if (isset($_POST['op'])) {
                                 $vector = $_REQUEST['op'];
+                                $idcit = $vector[0];
                             } else {
                                 $vector = $idcita;
+                                $idcit = $vector;
                             }
 
-                            $idcit = $vector[0];
+                            
 
-                            $sql = "select * from cita WHERE idcita =" . $vector[0] . "";
+                            $sql = "select * from cita WHERE idcita =" . $idcit . "";
                             $result2 = db_query($sql);
                             $row = mysqli_fetch_object($result2);
                             $nume = $row->idcita;
@@ -114,10 +116,10 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                 <form action="citas-programar.php?idcita=<?php print $nume; ?>" method="post">
                                     <div class="form-check form-check-inline" style="display: none">
                                         <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>" checked required disabled>
-                                        <label class="form-check-label"><?php echo $row->nombre ?></label>
+                                        <label class="form-check-label"><?php echo $row->servicio ?></label>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label datos fw-bold">Servicio de: <?php echo $row->nombre; ?> </label>
+                                        <label class="form-label datos fw-bold">Servicio de: <?php echo $row->servicio; ?> </label>
                                     </div>
 
                                     <div class="col-md-6">
@@ -203,7 +205,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                 <form action="citas-programar.php" method="post">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>">
-                                        <label class="form-check-label"><?php echo $row->nombre ?></label>
+                                        <label class="form-check-label"><?php echo $row->servicio ?></label>
                                     </div>
                                 <?php
                                 $contador = $contador + 1;

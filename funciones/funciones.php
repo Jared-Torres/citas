@@ -18,6 +18,12 @@ function delete($tblname,$field_id,$id){ //Funcion para borrar registros
 	
 	return db_query($sql);
 }
+function update($tblname,$fieldname,$que, $id, $iddonde){ //Funcion para actualizar registros
+   
+	$sql = "update ".$tblname." set " .$fieldname. " = '" . $que . "'   where ".$id."=".$iddonde."";
+	
+	return db_query($sql);
+}
 
 function select_id($tblname,$field_name,$field_id){
 	$sql = "Select * from ".$tblname." where ".$field_name." = ".$field_id."";
