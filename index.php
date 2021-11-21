@@ -78,7 +78,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/inicio_sesion.css">
 
-  <title>E-commerce</title>
+  <title>Tecnicos y mantenimientos</title>
 </head>
 
 <body class="bg-ligth">
@@ -109,7 +109,7 @@
             </div>
             <div class="carousel-item img-3 min-vh-100">
               <div class="carousel-caption d-none d-md-block">
-                <h5 class="font-weight-bold text-dark">Envios Rapidos y Seguros</h5>
+                <h5 class="font-weight-bold text-dark">Reparaciones comfiables y seguras</h5>
                 <a href="#" class="text-decoration-none">Visita nuestra tienda</a>
               </div>
             </div>
@@ -128,7 +128,7 @@
       </div>
       <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
         <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
-          <img src="logos/logo.png" alt="logo" class="img-fluid">
+          <img src="logos/logo1.png" alt="logo" class="img-fluid">
         </div>
         <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
           <h1 class="font-weight-bold mb-4"><b>Bienvenido de vuelta</b></h1>
