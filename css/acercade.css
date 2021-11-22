@@ -1,0 +1,173 @@
+.acd1{
+    text-align: center;
+    color: aquamarine;
+}
+.texto{
+    color: beige;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.label_login{
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+.img_log{
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	border-radius: 50%;
+
+}
+
+.form-group{
+	margin-bottom: 10px;
+}
+
+.login{
+	min-width: 300px;
+	padding: 14px 14px 0;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, .8);
+}
+
+.help-block{
+	font-size: 14px;
+	text-align: right;
+}
+
+/*.forma{
+	border-radius: 20px;
+}*/
+
+.carousel-item {
+	height: 9cm;
+}
+
+.carousel-item img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	height: 9cm;
+	filter: brightness(35%);
+}
+
+.tabla-precio{
+	border: 1px solid #CCC;
+	max-width: 350px;
+	min-height: 300px;
+	border-radius: 0 25px 0 25px;
+	margin: 25px auto;
+	background-color: white;
+	box-shadow: 5px 5px 8px #CCC;
+	display: block;
+	padding: 0 0 8px 0;
+}
+
+.tabla-precio span{
+	display: block;
+}
+
+.titulo{
+	padding: 16px 0 0 0;
+	font-size: 2em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.precio{
+	padding: 0 0 16px 0;
+}
+
+.fondo-bk-t{
+	background-color: black;
+	color: white;
+	border-radius: 0 25px 0 0;
+}
+
+.fondo-bk{
+	background-color: black;
+	color: white;
+}
+
+.servicios{
+	padding: 8px 0;
+	font-weight: bold;
+	font-size: 1.3em;
+	border-bottom: 1px solid #CCC;
+}
+
+.tabla-precio ul{
+	list-style: none;
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+.tabla-precio ul li{
+	display: block;
+	padding: 8px 0;
+	border-bottom: 1px solid #CCC;
+	margin-left: 30px;
+}
+
+.tabla-precio a{
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.fondo-gr-t{
+	background-color: #107A07;
+	color: white;
+	border-radius: 0 25px 0 0;
+}
+
+.fondo-gr{
+	background-color: #107A07;
+	color: white;
+}
+
+.fondo-rj-t{
+	background-color: red;
+	color: white;
+	border-radius: 0 25px 0 0;
+}
+
+.fondo-rj{
+	background-color: red;
+	color: white;
+}
+
+.fondo-az-t{
+	background-color: #0392FC;
+	color: white;
+	border-radius: 0 25px 0 0;
+}
+
+.fondo-az{
+	background-color: #0392FC;
+	color: white;
+}
+
+.caja{
+	background-color: #B2E9F3;
+	margin: 30px 0;
+	padding: 40px 10px;
+	border-radius: 20px;
+
+}
+
+.link{
+	text-decoration: none;
+	color: #0062CC;
+	border-bottom: 2px solid #0062CC;
+	font-size: 1.3em;
+}
+
+.icono{
+	color: #0062CC;
+}
