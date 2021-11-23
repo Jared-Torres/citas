@@ -30,7 +30,7 @@ include("../funciones/funciones.php");
                 <h2 class="fw-bold">Citas de los clientes</h2>
             </div>
             <hr>
-            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
+            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1">
                 <form action="citas-cliente.php" method="POST">
                     <label class="form-label datos fw-bold"> Filtrar citas </label>
                     <select name="filtro">
@@ -58,13 +58,14 @@ include("../funciones/funciones.php");
                         <?php
                         while ($row2 = mysqli_fetch_object($result2)) {
                         ?>
-                            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
+                            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 ">
                                 <div class="col-md-6">
                                     <label class="form-label datos fw-bold">Cita <?php echo $contador ?> : </label>
                                     <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">
                                         Cliente: <?php echo $row2->nombre ?> <?php echo $row2->segundonombre ?> <?php echo $row2->paterno ?> <?php echo $row2->materno ?><br>
                                         Servicio: <?php echo $row2->servicio ?><br>
                                         Costo: &#36; <?php echo $row2->costo ?><br>
+                                        Descripcion: <?php echo $row2->descrip ?><br>
                                         Duracion en horas del servicio: <?php echo $row2->horas ?><br>
                                         Fecha de cita: <?php echo $row2->dia ?> <?php echo $row2->hora ?><br>
                                         Estado: <?php echo $row2->estado ?><br>
@@ -91,13 +92,14 @@ include("../funciones/funciones.php");
                         while ($row = mysqli_fetch_object($result)) {
                         ?>
 
-                            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1 row">
-                                <div class="col-md-6">
+                            <div class="container shadow-sm p-3 mb-3 bg-body rounded bloque1">
+                                <div class="">
                                     <label class="form-label datos fw-bold">Cita <?php echo $contador ?> : </label>
                                     <div class="shadow-sm p-3 mb-5 bg-body rounded text-muted informacion ">
                                         Cliente: <?php echo $row->nombre ?> <?php echo $row->segundonombre ?> <?php echo $row->paterno ?> <?php echo $row->materno ?><br>
                                         Servicio: <?php echo $row->servicio ?><br>
                                         Costo: &#36; <?php echo $row->costo ?><br>
+                                        Descripcion: <?php echo $row->descrip ?><br>
                                         Duracion en horas del servicio: <?php echo $row->horas ?><br>
                                         Fecha de cita: <?php echo $row->dia ?> <?php echo $row->hora ?><br>
                                         Estado: <?php echo $row->estado ?><br>
@@ -118,7 +120,7 @@ include("../funciones/funciones.php");
                         } ?>
                     <?php } ?>
                 <?php else : ?>
-                    <div style="border: gray 2px solid; margin: 30px;">
+                    <div style="border: gray 2px solid;">
                         <b>No tiene citas agendadas</b>
                     </div>
                 <?php endif; ?>

@@ -103,7 +103,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                 $idcit = $vector;
                             }
 
-                            
+
 
                             $sql = "select * from cita WHERE idcita =" . $idcit . "";
                             $result2 = db_query($sql);
@@ -143,7 +143,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                     <?php } ?>
 
                                     <?php if (isset($_GET['idcita'])) {
-                                        $horas = array (
+                                        $horas = array(
                                             0 => "08:00:00",
                                             1 => "09:00:00",
                                             2 => "10:00:00",
@@ -163,7 +163,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
 
                                         $horasno;
                                         $j = 0;
-                                        while ($row3 = mysqli_fetch_object($result3)){ 
+                                        while ($row3 = mysqli_fetch_object($result3)) {
                                             $horasno[$j] = $row3->hora;
                                             $j++;
                                         };
@@ -175,11 +175,17 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                     ?>
                                             <div class="col-md-6">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="hora" value="<?php print $horas[$i]; ?>" <?php for($z=0; $z<count($horasno); $z++){if($horasno[$z] == $horas[$i]){ print "disabled"; break; }}  ?>>
+                                                    <input class="form-check-input" type="radio" name="hora" value="<?php print $horas[$i]; ?>" <?php for ($z = 0; $z < count($horasno); $z++) {
+                                                                                                                                                    if ($horasno[$z] == $horas[$i]) {
+                                                                                                                                                        print "disabled";
+                                                                                                                                                        break;
+                                                                                                                                                    }
+                                                                                                                                                }  ?>>
                                                     <label class="form-check-label"><?php print $horas[$i];  ?></label>
                                                 </div>
                                             </div><br>
-                                    <?php $i++;}
+                                    <?php $i++;
+                                        }
                                     } ?>
 
                                     <button class="btn btn-outline-success" type="submit" name="send">Seleccionar fecha</button>
@@ -203,10 +209,14 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                             while ($row = mysqli_fetch_object($result)) {
                             ?>
                                 <form action="citas-programar.php" method="post">
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check" style="background-color: lightblue; border-radius: 5px; padding: 5%;">
+                                        
                                         <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>">
-                                        <label class="form-check-label"><?php echo $row->servicio ?></label>
-                                    </div>
+                                        <label class="form-check-label">Servicio: <b><?php echo $row->servicio ?></label></b><br>
+                                        <label class="form-check-label">Costo: <?php echo $row->costo ?></label><br>
+                                        <label class="form-check-label">Horas de servicio: <?php echo $row->horas ?></label><br>
+                                        <label class="form-check-label">Descripcion: <?php echo $row->descrip ?></label><br>
+                                    </div><br>
                                 <?php
                                 $contador = $contador + 1;
                             }

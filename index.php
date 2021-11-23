@@ -104,13 +104,13 @@
             <div class="carousel-item img-2 min-vh-100">
               <div class="carousel-caption d-none d-md-block">
                 <h5 class="font-weight-bold text-dark">Los mejores precios</h5>
-                <a href="#" class="text-decoration-none">Visita nuestra tienda</a>
+                <a href="acerca_de.php" class="text-decoration-none">Mas informacion...</a>
               </div>
             </div>
             <div class="carousel-item img-3 min-vh-100">
               <div class="carousel-caption d-none d-md-block">
                 <h5 class="font-weight-bold text-dark">Reparaciones comfiables y seguras</h5>
-                <a href="#" class="text-decoration-none">Visita nuestra tienda</a>
+                <a href="acerca_de.php" class="text-decoration-none">Mas informacion...</a>
               </div>
             </div>
           </div>

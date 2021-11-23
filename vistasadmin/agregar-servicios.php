@@ -6,13 +6,14 @@ if ($admin == null) {
 
 if (!empty($_POST['servicio'])) {
 
-    $mysql = "INSERT INTO cita (servicio,costo,horas) VALUES (:servicio,:costo,:horas)";
+    $mysql = "INSERT INTO cita (servicio,costo,horas,descrip) VALUES (:servicio,:costo,:horas,:descrip)";
 
     $agregard = $conn->prepare($mysql);
 
     $agregard->bindParam(':servicio', $_POST['servicio']);
     $agregard->bindParam(':costo', $_POST['costo']);
     $agregard->bindParam(':horas', $_POST['horas']);
+    $agregard->bindParam(':descrip', $_POST['descrip']);
 
     if ($agregard->execute()) {
         $message = 'Servicio agregado';
@@ -54,6 +55,10 @@ if (!empty($_POST['servicio'])) {
                         <div class="col-md-6 mb-4">
                             <label for="validationDefault02" class="form-label fw-bold">Horas del trabajo:</label>
                             <input type="text" class="form-control text-muted" placeholder="Horas..." name="horas" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationDefault02" class="form-label fw-bold">Descripcion:</label>
+                            <textarea class="form-control" aria-label="With textarea" name="descrip" required placeholder="Describa el servicio"></textarea>
                         </div>
                         
                         <div class="col-12">

@@ -49,6 +49,7 @@ if ($admin == null) {
                                     Nombre: <?php echo $row->servicio; ?><br>
                                     Costo: $<?php echo $row->costo; ?><br>
                                     Horas: <?php echo $row->horas; ?><br>
+                                    Descripcion: <?php echo $row->descrip; ?><br>
                                 </div>
                                 <div class="position-relative">
                                     <a class="btn btn-danger" href="../funciones/borrarservicio.php?idcita=<?php echo $row->idcita; ?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>

@@ -41,14 +41,14 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="css/perfil_Y_tarjeta.css">
     
 
-    <title>Servicio y mantenimiento</title>
+    <title>UnitedTowers</title>
 </head>
 
 <body>
     <nav class="row navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid ">
-            <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="index.php">
-                <img src="logos/logo1.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top ">Servicio
+            <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="principal.php">
+                <img src="logos/logo1.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top "> <b> United Towers</b>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
