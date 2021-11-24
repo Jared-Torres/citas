@@ -128,7 +128,7 @@
       </div>
       <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
         <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
-          <img src="logos/logo1.png" alt="logo" class="img-fluid">
+          <img src="logos/logo3.png" alt="logo" class="">
         </div>
         <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
           <h1 class="font-weight-bold mb-4"><b>Bienvenido de vuelta</b></h1>

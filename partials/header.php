@@ -48,7 +48,7 @@ if (isset($_SESSION['user_id'])) {
     <nav class="row navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid ">
             <a class="navbar-brand col-md-4 col-lg-5  logo-link" href="principal.php">
-                <img src="logos/logo1.png" alt="logo" width="52" height="28" class="d-inline-block align-text-top "> <b> United Towers</b>
+                <img src="logos/logo4.png" alt="logo" width="130" height="40" class="d-inline-block align-text-top "> 
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,6 +91,8 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
     </nav>
-    <hr class="navegacion">
+    <hr class="navegacion" style="width: 100%;">
+    
+    <br>
 
     <div></div>

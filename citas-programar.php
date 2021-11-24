@@ -113,7 +113,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                             $i = 0;
                         ?>
                             <div>
-                                <form action="citas-programar.php?idcita=<?php print $nume; ?>" method="post">
+                                <form name="miformulario" action="citas-programar.php?idcita=<?php print $nume; ?>" method="post">
                                     <div class="form-check form-check-inline" style="display: none">
                                         <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>" checked required disabled>
                                         <label class="form-check-label"><?php echo $row->servicio ?></label>
@@ -132,13 +132,13 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                         $idcita = $_GET['idcita']; ?>
                                         <div class="col-md-6">
                                             <?php $di = getdate(); ?>
-                                            <input id="fechita" type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>" value="<?php print $diaelejido ?>">
+                                            <input id="fechita" onchange="cargar()" type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>" value="<?php print $diaelejido ?>">
                                         </div>
                                     <?php } else { ?>
 
                                         <div class="col-md-6">
                                             <?php $di = getdate(); ?>
-                                            <input id="fechita" type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>">
+                                            <input id="fechita" onchange="cargar()"  type="date" required class="form-control" name="dia" min="<?php print $di['year']; ?>-<?php print $di['mon']; ?>-<?php print $di['mday'] + 1; ?>">
                                         </div>
                                     <?php } ?>
 
@@ -176,11 +176,11 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                                             <div class="col-md-6">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="hora" value="<?php print $horas[$i]; ?>" <?php for ($z = 0; $z < count($horasno); $z++) {
-                                                                                                                                                    if ($horasno[$z] == $horas[$i]) {
-                                                                                                                                                        print "disabled";
-                                                                                                                                                        break;
-                                                                                                                                                    }
-                                                                                                                                                }  ?>>
+                                                                                                                                                                if ($horasno[$z] == $horas[$i]) {
+                                                                                                                                                                    print "disabled";
+                                                                                                                                                                    break;
+                                                                                                                                                                }
+                                                                                                                                                            }  ?>>
                                                     <label class="form-check-label"><?php print $horas[$i];  ?></label>
                                                 </div>
                                             </div><br>
@@ -210,7 +210,7 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
                             ?>
                                 <form action="citas-programar.php" method="post">
                                     <div class="form-check" style="background-color: lightblue; border-radius: 5px; padding: 5%;">
-                                        
+
                                         <input class="form-check-input" type="radio" name="op[]" value="<?php echo $row->idcita ?>">
                                         <label class="form-check-label">Servicio: <b><?php echo $row->servicio ?></label></b><br>
                                         <label class="form-check-label">Costo: <?php echo $row->costo ?></label><br>
@@ -251,8 +251,9 @@ if (!empty($_POST['dia']) && !empty($_POST['hora'])) {
 </div>
 </div>
 <script>
-    function siguiente() {
-
+    function cargar(){
+                // Una vez cargada la página, el formulario se enviara automáticamente.
+		document.forms["miformulario"].submit();
     }
 </script>
 <?php require 'partials/footer.php' ?>
